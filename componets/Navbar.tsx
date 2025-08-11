@@ -1,12 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Navbar({ currentUser }) {
+// Define the shape of your currentUser object
+interface User {
+  name: string;
+  avatar: string;
+}
+
+// Define props type
+interface NavbarProps {
+  currentUser?: User | null;  // optional or can be null if no user
+}
+
+export default function Navbar({ currentUser }: NavbarProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setDropdownOpen(false);
       }
     }
@@ -14,7 +28,6 @@ export default function Navbar({ currentUser }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // If no user, don't show the dropdown/avatar at all (optional)
   if (!currentUser) {
     return (
       <nav className="bg-indigo-600 text-white flex justify-between items-center px-6 py-4 shadow-md">
@@ -41,8 +54,8 @@ export default function Navbar({ currentUser }) {
             <button
               onClick={() => {
                 setDropdownOpen(false);
-                // Perform logout action here if needed (e.g., clearing auth tokens)
-                window.location.href = '/';  // Redirect to login
+                // Perform logout action here if needed
+                window.location.href = "/";
               }}
               className="block w-full text-left px-4 py-2 hover:bg-indigo-100 transition"
             >
