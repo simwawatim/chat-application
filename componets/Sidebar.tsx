@@ -1,6 +1,27 @@
 import React, { useState } from "react";
 
-export default function Sidebar({ users, currentUser, onSelectUser, activeUserId }) {
+// Define the User type (based on your usage)
+interface User {
+  id: string | number;
+  name: string;
+  avatar: string;
+  online: boolean;
+}
+
+// Define the props type for Sidebar
+interface SidebarProps {
+  users: User[];
+  currentUser: User;
+  onSelectUser: (user: User) => void;
+  activeUserId: string | number;
+}
+
+export default function Sidebar({
+  users,
+  currentUser,
+  onSelectUser,
+  activeUserId,
+}: SidebarProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredUsers = users
@@ -8,8 +29,10 @@ export default function Sidebar({ users, currentUser, onSelectUser, activeUserId
     .filter((u) => u.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
-    <aside className="bg-white border-r border-gray-300 flex flex-col
-                    w-full md:w-72 max-h-screen">
+    <aside
+      className="bg-white border-r border-gray-300 flex flex-col
+                    w-full md:w-72 max-h-screen"
+    >
       {/* Search input */}
       <div className="p-4 border-b border-gray-200">
         <input
