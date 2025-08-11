@@ -13,7 +13,7 @@ interface SidebarProps {
   users: User[];
   currentUser: User;
   onSelectUser: (user: User) => void;
-  activeUserId: string | number;
+  activeUserId?: string | number;
 }
 
 export default function Sidebar({

@@ -3,7 +3,16 @@ import Navbar from "../../../componets/Navbar";
 import Sidebar from "../../../componets/Sidebar";
 import Home from "../../../componets/Home";
 
-const users = [
+// Define User type without unrelated props
+export type User = {
+  id: number | string;
+  name: string;
+  avatar: string;
+  online: boolean;
+};
+
+// Sample users
+const users: User[] = [
   { id: 1, name: "Alice", avatar: "https://i.pravatar.cc/150?u=alice", online: true },
   { id: 2, name: "Bob", avatar: "https://i.pravatar.cc/150?u=bob", online: false },
   { id: 3, name: "Charlie", avatar: "https://i.pravatar.cc/150?u=charlie", online: true },
@@ -18,10 +27,9 @@ const users = [
   { id: 12, name: "Lily", avatar: "https://i.pravatar.cc/150?u=lily", online: true },
 ];
 
-
 export default function App() {
   const currentUser = users[0];
-  const [activeUser, setActiveUser] = useState(null);
+  const [activeUser, setActiveUser] = useState<User | null>(null);
 
   return (
     <div className="flex flex-col h-screen bg-indigo-50 font-sans">
@@ -31,15 +39,10 @@ export default function App() {
           users={users}
           currentUser={currentUser}
           onSelectUser={setActiveUser}
-          activeUserId={activeUser?.id}
+          activeUserId={activeUser?.id} 
         />
         <Home activeUser={activeUser} />
       </div>
     </div>
   );
 }
-
-
-
-
-
