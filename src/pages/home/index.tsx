@@ -2,16 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../../../componets/Navbar";
 import Sidebar from "../../../componets/Sidebar";
 import Home from "../../../componets/Home";
+import { User } from "../../../componets/types";
 
-// Define User type without unrelated props
-export type User = {
-  id: number | string;
-  name: string;
-  avatar: string;
-  online: boolean;
-};
-
-// Sample users
 const users: User[] = [
   { id: 1, name: "Alice", avatar: "https://i.pravatar.cc/150?u=alice", online: true },
   { id: 2, name: "Bob", avatar: "https://i.pravatar.cc/150?u=bob", online: false },
@@ -39,9 +31,15 @@ export default function App() {
           users={users}
           currentUser={currentUser}
           onSelectUser={setActiveUser}
-          activeUserId={activeUser?.id} 
+          activeUserId={activeUser?.id}
         />
-        <Home activeUser={activeUser} />
+        <Home
+          activeUser={activeUser}
+          users={users}
+          currentUser={currentUser}
+          onSelectUser={setActiveUser}
+          activeUserId={activeUser?.id}
+        />
       </div>
     </div>
   );

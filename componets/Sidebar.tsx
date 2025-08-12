@@ -1,19 +1,11 @@
 import React, { useState } from "react";
+import { User } from "./types";
 
-// Define the User type (based on your usage)
-interface User {
-  id: string | number;
-  name: string;
-  avatar: string;
-  online: boolean;
-}
-
-// Define the props type for Sidebar
 interface SidebarProps {
   users: User[];
   currentUser: User;
   onSelectUser: (user: User) => void;
-  activeUserId?: string | number;
+  activeUserId?: string | number | null;
 }
 
 export default function Sidebar({
@@ -29,25 +21,20 @@ export default function Sidebar({
     .filter((u) => u.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
-    <aside
-      className="bg-white border-r border-gray-300 flex flex-col
-                    w-full md:w-72 max-h-screen"
-    >
-      {/* Search input */}
+    <aside className="hidden md:flex flex-col bg-white border-r border-gray-300 w-72 max-h-screen">
+      {/* Search box */}
       <div className="p-4 border-b border-gray-200">
         <input
           type="text"
           placeholder="Search users..."
-          className="w-full px-3 py-2 rounded-md border border-gray-300 
-                     focus:outline-none focus:ring-2 focus:ring-indigo-500 
-                     text-black"
+          className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           autoComplete="off"
         />
       </div>
 
-      {/* Users list */}
+      {/* User list */}
       <ul className="overflow-y-auto flex-1">
         {filteredUsers.length > 0 ? (
           filteredUsers.map((user) => (
@@ -64,12 +51,10 @@ export default function Sidebar({
                   alt={user.name}
                   className="w-12 h-12 rounded-full object-cover"
                 />
-                {/* Online status dot */}
                 <span
                   className={`absolute bottom-0 right-0 block w-3 h-3 rounded-full border-2 border-white ${
                     user.online ? "bg-green-500" : "bg-gray-400"
                   }`}
-                  title={user.online ? "Online" : "Offline"}
                 />
               </div>
               <span className="font-semibold text-gray-800">{user.name}</span>
