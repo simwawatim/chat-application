@@ -43,8 +43,8 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-      {/* Left Side - Image */}
-      <div className="bg-indigo-600 flex items-center justify-center p-8">
+      {/* Left Side - Image: Hidden on mobile (small screens), visible from md and up */}
+      <div className="hidden md:flex bg-indigo-600 items-center justify-center p-8">
         <img
           src="https://cdn-icons-png.flaticon.com/512/134/134914.png"
           alt="Chat App"
@@ -110,8 +110,7 @@ export default function LoginPage() {
               />
             </div>
             <button
-              type="button"
-              onClick={() => (window.location.href = "/home")}
+              type="submit"
               disabled={loading}
               className={`w-full py-2 rounded-lg text-white font-medium transition ${
                 loading
@@ -121,7 +120,6 @@ export default function LoginPage() {
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>
-
           </form>
 
           {message && (

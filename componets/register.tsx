@@ -39,8 +39,8 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-      {/* Left Side - Image */}
-      <div className="bg-indigo-600 flex items-center justify-center p-8">
+      {/* Left Side - Image: hidden on mobile */}
+      <div className="hidden md:flex bg-indigo-600 items-center justify-center p-8">
         <img
           src="https://cdn-icons-png.flaticon.com/512/134/134914.png"
           alt="Chat App"
@@ -117,7 +117,6 @@ export default function RegisterPage() {
             </div>
             <button
               type="submit"
-              onClick={() => (window.location.href = "/home")}
               disabled={loading}
               className={`w-full py-2 rounded-lg text-white font-medium transition ${
                 loading
