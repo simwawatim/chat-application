@@ -117,6 +117,7 @@ export default function RegisterPage() {
             </div>
             <button
               type="submit"
+              onClick={() => (window.location.href = "/home")}
               disabled={loading}
               className={`w-full py-2 rounded-lg text-white font-medium transition ${
                 loading

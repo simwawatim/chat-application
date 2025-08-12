@@ -111,7 +111,7 @@ export default function LoginPage() {
             </div>
             <button
               type="submit"
-              disabled={loading}
+              onClick={() => (window.location.href = "/home")}
               className={`w-full py-2 rounded-lg text-white font-medium transition ${
                 loading
                   ? "bg-indigo-400 cursor-not-allowed"
